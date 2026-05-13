@@ -1,7 +1,7 @@
 {
   "name": "relivastep",
-  "version": "1.0.0",
-  "description": "relivastep e‑commerce website with static files + M‑PESA ready backend",
+  "version": "2.0.0",
+  "description": "Relivastep – Kenya’s premium EMS massager brand",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
