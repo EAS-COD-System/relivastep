@@ -3,14 +3,15 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from the current directory (where HTML, CSS, JS, images are)
-app.use(express.static(path.join(__dirname)));
+// Serve static files from the 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-// For any other route, send the index.html (optional, for direct access to pages)
+// For any other route, send index.html from public folder
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`relivastep server running on port ${PORT}`);
+    console.log(`relivastep server running on port ${PORT}`);
+    console.log(`Serving files from: ${path.join(__dirname, 'public')}`);
 });
