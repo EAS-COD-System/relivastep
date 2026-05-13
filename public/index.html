@@ -1,195 +1,561 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>ReviveMate Foot Massager – relivastep Kenya</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReviveMate Foot Massager — KES 3,499 | Relivastep Kenya</title>
+  <meta name="description" content="Kenya's #1 EMS Foot Massager. Relieve pain, boost circulation, sleep better. Free delivery Nairobi. Pay on delivery via M-PESA." />
+  <link rel="stylesheet" href="styles.css" />
+  <!--
+    REQUIRED IMAGE ASSETS (place in /assets/):
+    hero-foot.jpeg         — Woman using foot massager, Nairobi skyline bg (1200×900)
+    how-foot-1.jpeg        — Plugging in the device (600×400)
+    how-foot-2.jpeg        — Feet on the mat, EMS waves visible (600×400)
+    how-foot-3.jpeg        — Selecting mode on remote (600×400)
+    circulation.jpeg       — Body circulation diagram (800×600)
+    pain-relief.jpeg       — Man with pain relief illustration (800×600)
+    portable.jpeg          — Portable massager product shot (600×600)
+    better-sleep.jpeg      — Person sleeping peacefully (800×500)
+    comparison-chart.jpeg  — Product comparison table image (1000×700)
+    testimonial-nurse.jpeg — Female Kenyan nurse headshot (200×200)
+    testimonial-driver.jpeg — Male Kenyan driver headshot (200×200)
+    whatsapp-review.jpeg   — WhatsApp screenshot of reviews (400×700)
+    bundle-upsell.jpeg     — Both products bundle shot (800×600)
+    kenya-owned.jpeg       — Kenya Owned & Operated badge (300×300)
+    warranty-badge.png     — 1 Year Warranty badge (300×300)
+    delivery-bike.jpeg     — Free delivery bike illustration (400×400)
+    mpesa-logo.png         — M-PESA logo (200×80)
+    visa-mastercard.png    — Visa/Mastercard logos (300×80)
+    logo-large.png         — Relivastep full logo (400×200)
+    logo.jpeg              — Relivastep compact logo (200×100)
+  -->
 </head>
 <body>
-    <header>
-        <div class="container header-flex">
-            <img src="images/logo.svg" alt="relivastep" class="logo" loading="lazy">
-            <a href="cart.html" class="cart-icon">🛒 <span id="cartCount">0</span></a>
-        </div>
-    </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container hero-grid">
-                <div class="hero-text">
-                    <h1>ReviveMate <span>Foot Massager</span></h1>
-                    <p class="hero-sub">EMS Therapy for Tired Feet – Made for Kenyan Professionals</p>
-                    <div class="price-large">KES 4,999</div>
-                    <ul class="hero-features">
-                        <li>✅ 6 Massage Modes</li>
-                        <li>✅ 10 Intensity Levels</li>
-                        <li>✅ Portable & Lightweight</li>
-                        <li>✅ Free Delivery Nairobi</li>
-                    </ul>
-                    <button class="btn-primary" id="heroAddToCart">Add to Cart – KES 4,999</button>
-                </div>
-                <div class="hero-image">
-                    <img src="images/hero-foot.jpg" alt="ReviveMate Foot Massager in use" loading="lazy">
-                </div>
-            </div>
-        </section>
+<!-- Announcement Bar -->
 
-        <!-- How It Works (3 steps) -->
-        <section class="how-it-works">
-            <div class="container">
-                <h2 class="section-title">How It Works</h2>
-                <div class="steps">
-                    <div class="step">
-                        <img src="images/how-foot-1.jpg" alt="Plug in" loading="lazy">
-                        <h3>1. Plug In</h3>
-                        <p>Connect to any standard socket – 24V safe adapter included.</p>
-                    </div>
-                    <div class="step">
-                        <img src="images/how-foot-2.jpg" alt="Place feet" loading="lazy">
-                        <h3>2. Place Feet</h3>
-                        <p>Rest your tired feet on the EMS pads. Instant contact.</p>
-                    </div>
-                    <div class="step">
-                        <img src="images/how-foot-3.jpg" alt="Select mode" loading="lazy">
-                        <h3>3. Select Mode</h3>
-                        <p>Use the remote to choose massage, acupressure, or relaxation.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<div class="announcement-bar">
+  🔥 <strong>FLASH SALE:</strong> Free delivery to Nairobi + 1 Year Warranty — Order Now, Pay on Delivery!
+</div>
 
-        <!-- Benefits Grid -->
-        <section class="benefits">
-            <div class="container">
-                <h2 class="section-title">Why Kenyans Love ReviveMate</h2>
-                <div class="benefits-grid">
-                    <div class="benefit-card"><img src="images/benefit-pain.jpg" alt="Pain relief"><h3>Relieves Plantar Fasciitis</h3><p>Targeted EMS reduces heel pain.</p></div>
-                    <div class="benefit-card"><img src="images/benefit-circulation.jpg" alt="Circulation"><h3>Boosts Blood Flow</h3><p>Ideal for long hours standing or sitting.</p></div>
-                    <div class="benefit-card"><img src="images/benefit-portable.jpg" alt="Portable"><h3>Take Anywhere</h3><p>Fits in your bag – use at work or home.</p></div>
-                    <div class="benefit-card"><img src="images/benefit-sleep.jpg" alt="Better sleep"><h3>Improves Sleep</h3><p>Relax before bed for deeper rest.</p></div>
-                </div>
-            </div>
-        </section>
+<!-- Header -->
 
-        <!-- Product Comparison -->
-        <section class="comparison">
-            <div class="container">
-                <h2 class="section-title">How We Compare</h2>
-                <img src="images/comparison.jpg" alt="Comparison chart" class="comparison-img" loading="lazy">
-            </div>
-        </section>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <img src="assets/logo-large.png" alt="Relivastep Logo" onerror="this.style.display='none'" />
+      <span class="logo-text">reliva<span>step</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Foot Massager</a>
+      <a href="body.html">Body Massager</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="cart-btn">
+        🛒 Cart <span class="cart-count">0</span>
+      </a>
+    </div>
+  </div>
+</header>
 
-        <!-- Testimonials -->
-        <section class="testimonials">
-            <div class="container">
-                <h2 class="section-title">Real Stories, Real Relief</h2>
-                <div class="testimonial-grid">
-                    <div class="testimonial-card">
-                        <img src="images/testimonial-1.jpg" alt="Grace N." loading="lazy">
-                        <p>"After 12-hour shifts, my feet used to throb. ReviveMate changed my life."</p>
-                        <h4>– Grace N., Nurse, Nairobi</h4>
-                    </div>
-                    <div class="testimonial-card">
-                        <img src="images/testimonial-2.jpg" alt="Peter O." loading="lazy">
-                        <p>"I drive matatus all day. This massager is my co-driver."</p>
-                        <h4>– Peter O., Driver, Mombasa</h4>
-                    </div>
-                    <div class="testimonial-card">
-                        <img src="images/testimonial-3.jpg" alt="WhatsApp review" loading="lazy">
-                        <p>"⭐⭐⭐⭐⭐ – Best investment for my home."</p>
-                        <h4>– Wanjiku, via WhatsApp</h4>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
 
-        <!-- Upsell Banner to Body Massager -->
-        <section class="upsell-banner">
-            <div class="container upsell-content">
-                <img src="images/bundle-upsell.jpg" alt="Bundle deal" loading="lazy">
-                <div class="upsell-text">
-                    <h2>Complete Your Recovery Kit</h2>
-                    <p>Add the <strong>ReliefKit Body Massager</strong> for back, neck & joints – only <strong>KES 3,500</strong> extra (save KES 1,500).</p>
-                    <button class="btn-secondary" id="upsellAddBody">Yes, Add Body Massager for KES 3,500</button>
-                    <button class="btn-outline-small" id="upsellSkip">No thanks, just foot massager</button>
-                </div>
-            </div>
-        </section>
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">✦ #1 EMS Massager in Kenya</div>
+        <h1>
+          <em>Relieve Your Feet,</em><br>
+          Reclaim Your Body
+        </h1>
+        <p class="hero-subtitle">
+          Medical-grade EMS therapy at home. 6 massage modes, deep circulation boost, zero effort. After a long day — you deserve this.
+        </p>
 
-        <!-- FAQ -->
-        <section class="faq">
-            <div class="container">
-                <h2 class="section-title">Frequently Asked Questions</h2>
-                <div class="faq-item"><h3>Does it work with M-PESA?</h3><p>Yes! Pay via M-PESA on our secure checkout page. Till number provided after order.</p></div>
-                <div class="faq-item"><h3>Delivery time?</h3><p>Nairobi: 1-2 days. Other towns: 3-5 days. Free delivery over KES 5,000.</p></div>
-                <div class="faq-item"><h3>Warranty?</h3><p>1 year full warranty. 7-day money-back guarantee.</p></div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <div class="container footer-flex">
-                <img src="images/logo.svg" alt="relivastep" class="logo-small">
-                <div class="payment-methods">
-                    <img src="images/mpesa-logo.png" alt="M-PESA">
-                    <img src="images/visa-mastercard.png" alt="Visa/Mastercard">
-                    <img src="images/delivery-bike.jpg" alt="Free delivery">
-                </div>
-                <p>© 2025 relivastep – Your step to relief</p>
-            </div>
-        </footer>
-    </main>
-
-    <!-- Order Bump Modal (appears after adding to cart) -->
-    <div id="orderBumpModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>🔥 Special One-Time Offer</h3>
-            <p>Add the <strong>ReliefKit Body Massager</strong> (normally KES 4,999) for only <strong>KES 3,500</strong>.</p>
-            <button id="modalAccept" class="btn-primary">Yes, Add for KES 3,500</button>
-            <button id="modalDecline" class="btn-outline">No, just the foot massager</button>
-        </div>
+```
+    <div class="hero-price-box">
+      <div>
+        <div class="price-original">KES 4,999</div>
+        <div class="price-current">KES 3,499</div>
+      </div>
+      <div class="price-savings">Save KES 1,500</div>
     </div>
 
-    <script src="script.js"></script>
-    <script>
-        // Initialize cart display
-        updateCartCount();
-        
-        const footProduct = { id: 'foot', name: 'ReviveMate Foot Massager', price: 4999 };
-        const bodyProduct = { id: 'body', name: 'ReliefKit Body Massager', price: 4999 };
-        let pendingAdd = null;
+    <div class="hero-cta-group">
+      <button class="btn btn-primary btn-lg" onclick="handleAddToCart('foot')">
+        🛒 Add to Cart — KES 3,499
+      </button>
+      <a href="cart.html" class="btn btn-secondary btn-lg">View Cart</a>
+    </div>
 
-        function showOrderBump(productAdded) {
-            pendingAdd = productAdded;
-            document.getElementById('orderBumpModal').style.display = 'flex';
-        }
+    <div class="hero-trust">
+      <div class="trust-item"><div class="icon">✓</div> Pay on Delivery</div>
+      <div class="trust-item"><div class="icon">✓</div> Free Nairobi Delivery</div>
+      <div class="trust-item"><div class="icon">✓</div> 1 Year Warranty</div>
+      <div class="trust-item"><div class="icon">✓</div> M-PESA Accepted</div>
+    </div>
+  </div>
 
-        document.getElementById('heroAddToCart').onclick = () => {
-            addToCart(footProduct);
-            showOrderBump(footProduct);
-        };
-        document.getElementById('upsellAddBody').onclick = () => {
-            addToCart(bodyProduct, 3500);
-            alert('Body massager added to cart! View cart.');
-        };
-        document.getElementById('upsellSkip').onclick = () => {
-            // just ignore
-        };
-        document.getElementById('modalAccept').onclick = () => {
-            addToCart(bodyProduct, 3500);
-            document.getElementById('orderBumpModal').style.display = 'none';
-            alert('Both products added! Go to cart to checkout.');
-        };
-        document.getElementById('modalDecline').onclick = () => {
-            document.getElementById('orderBumpModal').style.display = 'none';
-        };
-        document.querySelector('.close').onclick = () => {
-            document.getElementById('orderBumpModal').style.display = 'none';
-        };
-    </script>
+  <div class="hero-image">
+    <img
+      src="assets/hero-foot.jpeg"
+      alt="Woman relaxing with ReviveMate EMS Foot Massager in Nairobi apartment"
+      class="hero-image-main"
+      onerror="this.style.background='linear-gradient(135deg,#2d3d7a,#008080)'"
+    />
+    <div class="hero-floating-card card-1">
+      <div class="card-icon">⚡</div>
+      <div class="card-text">
+        <strong>EMS Technology</strong>
+        <span>6 massage modes</span>
+      </div>
+    </div>
+    <div class="hero-floating-card card-2">
+      <div class="card-icon">⭐</div>
+      <div class="card-text">
+        <strong>4.9 / 5 Stars</strong>
+        <span>2,400+ reviews</span>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- Trust Strip -->
+
+<div class="trust-strip">
+  <div class="container trust-strip-inner">
+    <div class="trust-strip-item">
+      <img src="assets/kenya-owned.jpeg" alt="Kenya Owned & Operated" />
+      Kenya Owned & Operated
+    </div>
+    <div class="trust-strip-item">
+      <img src="assets/warranty-badge.png" alt="1 Year Warranty" />
+      1 Year Warranty
+    </div>
+    <div class="trust-strip-item">
+      <img src="assets/delivery-bike.jpeg" alt="Free Delivery Nairobi" />
+      Free Delivery Nairobi
+    </div>
+    <div class="trust-strip-item">
+      <img src="assets/mpesa-logo.png" alt="M-PESA Accepted" class="mpesa" />
+      Pay via M-PESA
+    </div>
+    <div class="trust-strip-item">
+      <img src="assets/visa-mastercard.png" alt="Visa & Mastercard" />
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     HOW IT WORKS
+════════════════════════════════════════ -->
+
+<section class="how-it-works">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:48px;">
+      <div class="section-label">Simple To Use</div>
+      <h2 class="section-title">Relief in 3 Easy Steps</h2>
+      <p class="section-subtitle" style="margin:0 auto;">No apps, no complicated setup. Just plug in, stand on the mat, and let EMS do the work.</p>
+    </div>
+
+```
+<div class="steps-grid">
+  <div class="step-card fade-up">
+    <img src="assets/plug-in.jpeg" alt="Step 1: Plug in the ReviveMate foot massager" class="step-image" />
+    <div class="step-body">
+      <div class="step-number">1</div>
+      <h3>Plug In</h3>
+      <p>Connect the compact controller to any USB port or power adapter. The LED indicator confirms it's ready — no charging wait time.</p>
+    </div>
+  </div>
+
+  <div class="step-card fade-up">
+    <img src="assets/how-foot-2.jpeg" alt="Step 2: Place feet on the EMS massage mat" class="step-image" />
+    <div class="step-body">
+      <div class="step-number">2</div>
+      <h3>Place Feet</h3>
+      <p>Step onto the textured massage mat barefoot. The dual-zone design stimulates both feet simultaneously for maximum effect.</p>
+    </div>
+  </div>
+
+  <div class="step-card fade-up">
+    <img src="assets/select-mode.jpeg" alt="Step 3: Select massage mode on remote control" class="step-image" />
+    <div class="step-body">
+      <div class="step-number">3</div>
+      <h3>Select Your Mode</h3>
+      <p>Choose from 6 EMS programs — from gentle circulation to deep tissue stimulation. Adjust intensity with + and − buttons.</p>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     BENEFITS
+════════════════════════════════════════ -->
+
+<section class="benefits" style="background: var(--off-white);">
+  <div class="container">
+    <div class="benefits-header">
+      <div class="section-label">Why ReviveMate</div>
+      <h2 class="section-title">What Your Feet Get Every Session</h2>
+      <p class="section-subtitle">Thousands of Kenyans — nurses, drivers, teachers — swear by these 6 benefits.</p>
+    </div>
+
+```
+<div class="benefits-grid">
+  <div class="benefit-card fade-up">
+    <div class="benefit-icon-wrap">🦵</div>
+    <h3>Instant Pain Relief</h3>
+    <p>EMS pulses disrupt pain signals at the source. Most users feel significant relief within the first 15-minute session.</p>
+  </div>
+
+  <div class="benefit-card fade-up">
+    <div class="benefit-icon-wrap">🩸</div>
+    <h3>Boost Circulation</h3>
+    <p>Electrical muscle stimulation increases blood flow to the feet and lower legs — critical if you stand or sit all day.</p>
+  </div>
+
+  <div class="benefit-card fade-up">
+    <div class="benefit-icon-wrap">🎒</div>
+    <h3>Ultra Portable</h3>
+    <p>Folds flat to the size of a laptop. Take it to work, use it at your desk, or pack it for travel anywhere in East Africa.</p>
+  </div>
+
+  <div class="benefit-card fade-up">
+    <div class="benefit-icon-wrap">😴</div>
+    <h3>Better Sleep</h3>
+    <p>30 minutes before bed helps your body wind down. Relaxed feet = relaxed body = deeper, more restorative sleep.</p>
+  </div>
+
+  <div class="benefit-card fade-up">
+    <div class="benefit-icon-wrap">🧘</div>
+    <h3>Stress Reduction</h3>
+    <p>Reflexology zones on the foot connect to your whole nervous system. Regular sessions reduce cortisol levels.</p>
+  </div>
+
+  <div class="benefit-card fade-up">
+    <div class="benefit-icon-wrap">💡</div>
+    <h3>Easy to Use</h3>
+    <p>No manuals, no apps. One button turns it on. Children and the elderly can use it without assistance.</p>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     COMPARISON TABLE
+════════════════════════════════════════ -->
+
+<section class="comparison">
+  <div class="container">
+    <div class="comparison-header fade-up">
+      <div class="section-label">How We Compare</div>
+      <h2 class="section-title">ReviveMate vs Generic Massagers</h2>
+      <p class="section-subtitle">See exactly why 2,400+ Kenyans chose us over cheap alternatives.</p>
+    </div>
+
+```
+<div class="comparison-image-wrap fade-up" style="margin-top:40px; max-width:800px; margin-left:auto; margin-right:auto;">
+  <img src="assets/comparison-chart.jpeg" alt="Relivastep vs Generic Massager Comparison Chart showing EMS technology, 6 modes, warranty, and value advantages" />
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════ -->
+
+<section class="testimonials">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="section-label">Real Customers</div>
+      <h2 class="section-title">What Kenyans Are Saying</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Unfiltered reviews from real buyers across Nairobi, Mombasa, and beyond.</p>
+    </div>
+
+```
+<div class="testimonials-grid">
+  <div class="testimonial-card fade-up">
+    <div class="stars">★★★★★</div>
+    <p class="testimonial-text">
+      "Nikiwa kazi kwa masaa mengi kila siku, miguu yangu ilikuwa inaniuma sana usiku. 
+      Baada ya wiki moja ya kutumia ReviveMate, tofauti ni ya ajabu! Ninakubaliana na hii."
+    </p>
+    <div class="testimonial-author">
+      <img src="assets/testimonial-nurse.jpeg" alt="Grace Wanjiku — Nurse, Kenyatta Hospital" class="testimonial-avatar" />
+      <div class="testimonial-info">
+        <strong>Grace Wanjiku</strong>
+        <span>Nurse, Kenyatta Hospital — Nairobi</span>
+        <div class="verified-badge">✓ Verified Purchase</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-card fade-up">
+    <div class="stars">★★★★★</div>
+    <p class="testimonial-text">
+      "Niendesha gari kwa saa 10 kila siku. Miguu yangu na mgongo haukuniruhusu kulala vizuri. 
+      Tangu nilinunua hii, nimelala vizuri zaidi kuliko miaka miwili iliyopita!"
+    </p>
+    <div class="testimonial-author">
+      <img src="assets/testimonial-driver.jpeg" alt="John Kamau — Long distance driver, Nairobi" class="testimonial-avatar" />
+      <div class="testimonial-info">
+        <strong>John Kamau</strong>
+        <span>Long Distance Driver — Nairobi</span>
+        <div class="verified-badge">✓ Verified Purchase</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-card whatsapp-card fade-up">
+    <img src="assets/whatsapp-review.jpeg" alt="WhatsApp review screenshot from Grace Wanjiku — Amazing products, foot and body massager are game changers" />
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     UPSELL BANNER
+════════════════════════════════════════ -->
+
+<section class="upsell-banner">
+  <div class="container">
+    <div class="upsell-inner">
+      <div class="upsell-content fade-up">
+        <div class="upsell-tag">🔥 Special Bundle Offer</div>
+        <h2>Complete Your Recovery with ReliefKit Body Massager</h2>
+        <p>
+          Your feet feel amazing — now imagine your back, neck, and shoulders getting the same treatment.
+          Add the 5-in-1 body massager to your order at a massive discount.
+        </p>
+        <div class="upsell-price-row">
+          <span class="upsell-price">KES 1,999</span>
+          <span class="upsell-original">KES 2,999</span>
+          <span class="upsell-savings-tag">Save KES 1,000</span>
+        </div>
+        <button class="btn btn-primary btn-lg" onclick="addToCart('body',1999); showToast('🎉 ReliefKit added at KES 1,999!'); window.location.href='cart.html'">
+          Add ReliefKit — Only KES 1,999
+        </button>
+      </div>
+      <div class="upsell-image fade-up">
+        <img src="assets/bundle-upsell.jpeg" alt="ReviveMate + ReliefKit Bundle — Ultimate Home Relaxation Bundle KES 6,999" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FAQ
+════════════════════════════════════════ -->
+
+<section class="faq">
+  <div class="container">
+    <div class="faq-header">
+      <div class="section-label">Got Questions?</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+
+```
+<div class="faq-list">
+  <div class="faq-item">
+    <button class="faq-question">
+      How do I pay? Do you accept M-PESA?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Yes! We accept M-PESA, Airtel Money, Visa, and Mastercard — all on delivery. You only pay when you receive and inspect your order. No upfront payment required.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      How long does delivery take?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Nairobi: Same day or next day delivery (free). Mombasa, Kisumu, Nakuru: 1–2 business days (KES 200). Other towns: 2–3 business days. Our team calls to confirm your order within 2 hours of placing it.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      What does the 1-year warranty cover?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>The warranty covers all manufacturing defects, electrical malfunctions, and product failures during normal use. Simply WhatsApp us and we'll arrange a free replacement or repair. No questions asked.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      Is it safe to use every day?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Yes, daily use is safe for most adults. We recommend 15–30 minute sessions. Please avoid use if you are pregnant, have a pacemaker, have open wounds, or have been diagnosed with deep vein thrombosis. Consult your doctor if unsure.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      What if the product doesn't work for me?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>We're confident you'll love it. If for any reason you're unsatisfied within 7 days of delivery, contact us via WhatsApp and we'll arrange a hassle-free return and full refund.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      Do you deliver outside Nairobi?
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>Absolutely! We deliver nationwide across Kenya — Mombasa, Kisumu, Nakuru, Eldoret, Thika, and more. We also ship to Tanzania, Uganda, Zambia, and Zimbabwe. Delivery fee applies for outside Nairobi.</p>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- Final CTA -->
+
+<section style="background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%); padding: 80px 0; text-align: center;">
+  <div class="container">
+    <div class="section-label" style="background: rgba(0,128,128,0.2); color: #4af0f0;">Limited Stock</div>
+    <h2 style="color: white; margin-bottom: 16px;">Ready to Relieve Your Step?</h2>
+    <p style="color: rgba(255,255,255,0.7); margin-bottom: 32px; max-width:500px; margin-left:auto; margin-right:auto;">
+      Join 2,400+ Kenyans already enjoying pain-free evenings. Order now — pay on delivery via M-PESA.
+    </p>
+    <button class="btn btn-primary btn-lg" onclick="handleAddToCart('foot')" style="font-size:1.1rem;">
+      🛒 Order Now — KES 3,499
+    </button>
+    <div style="margin-top:20px; display:flex; gap:24px; justify-content:center; flex-wrap:wrap;">
+      <span style="color:rgba(255,255,255,0.6); font-size:0.85rem;">✓ Pay on delivery</span>
+      <span style="color:rgba(255,255,255,0.6); font-size:0.85rem;">✓ Free Nairobi delivery</span>
+      <span style="color:rgba(255,255,255,0.6); font-size:0.85rem;">✓ 1 year warranty</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img src="assets/logo-large.png" alt="Relivastep" />
+          <span class="logo-text" style="color:white;">reliva<span>step</span></span>
+        </a>
+        <p>Kenya's #1 EMS massager brand. Wellness · Balance · Vitality. Proudly serving all of East Africa since 2022.</p>
+        <div class="footer-payment-logos">
+          <img src="assets/mpesa-logo.png" alt="M-PESA" class="mpesa" />
+          <img src="assets/visa-mastercard.png" alt="Visa Mastercard" />
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="index.html">ReviveMate Foot Massager</a></li>
+          <li><a href="body.html">ReliefKit Body Massager</a></li>
+          <li><a href="cart.html">View Cart</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Track My Order</a></li>
+          <li><a href="#">Returns Policy</a></li>
+          <li><a href="#">Warranty Claims</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/254700000000">WhatsApp: +254 700 000000</a></li>
+          <li><a href="mailto:hello@relivastep.com">hello@relivastep.com</a></li>
+          <li><a href="#">Nairobi, Kenya 🇰🇪</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Relivastep. All rights reserved. | relivastep.com</p>
+      <p style="display:flex;gap:12px;">
+        <a href="#" style="color:rgba(255,255,255,0.45);">Privacy Policy</a>
+        <a href="#" style="color:rgba(255,255,255,0.45);">Terms of Service</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+
+<a href="https://wa.me/254700000000?text=Hi!%20I'm%20interested%20in%20the%20ReviveMate%20Foot%20Massager" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- Upsell Modal -->
+
+<div class="modal-overlay" id="upsell-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-tag">🔥 One-Time Offer</div>
+      <h3>Wait! Complete Your Bundle</h3>
+      <p>You're saving big — add the body massager at a special price before checkout.</p>
+    </div>
+    <div class="modal-body">
+      <div class="modal-product-row">
+        <img id="modal-product-img" src="assets/hero-body.jpeg" alt="ReliefKit Body Massager" />
+        <div class="modal-product-info">
+          <strong id="modal-product-name">ReliefKit Body Massager</strong>
+          <div class="modal-price-pair">
+            <span class="modal-sale-price" id="modal-sale-price">KES 1,999</span>
+            <span class="modal-orig-price" id="modal-orig-price">KES 2,999</span>
+            <span class="modal-save-tag" id="modal-save-tag">Save KES 1,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary btn-full" id="modal-accept">
+        ✅ Yes! Add to My Order
+      </button>
+      <div class="modal-decline" onclick="closeModal()">
+        No thanks, I don't want to save KES 1,000
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
