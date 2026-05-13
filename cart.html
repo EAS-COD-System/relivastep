@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart | Relivastep Kenya</title>
+  <meta name="description" content="Review your order and checkout. Pay on delivery via M-PESA. Free Nairobi delivery.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ░░ ANNOUNCEMENT BAR ░░ -->
+
+<div class="ann-bar">
+  🔒 <strong>Secure Checkout</strong> — Pay on Delivery via M-PESA · Our team confirms your order within 2 hours
+</div>
+
+<!-- ░░ HEADER ░░ -->
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7600.png?v=1778708181"
+           alt="Relivastep logo"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+      <span class="logo-fallback" style="display:none">reliva<span>step</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Foot Massager</a>
+      <a href="body.html">Body Massager</a>
+      <a href="cart.html" class="active">Cart</a>
+    </nav>
+    <a href="cart.html" class="cart-link">
+      🛒 Cart <span class="cart-badge">0</span>
+    </a>
+  </div>
+</header>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░░░░
+     CART PAGE
+░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+
+<main class="cart-page">
+  <div class="container">
+
+```
+<!-- Breadcrumb -->
+<div class="cart-breadcrumb">
+  <a href="index.html">Home</a>
+  <span>›</span>
+  <span style="color:var(--navy);font-weight:600">Cart</span>
+</div>
+
+<!-- Page title -->
+<div style="margin-bottom:32px;">
+  <div class="section-eyebrow">Step 1 of 2</div>
+  <h1 style="font-size:clamp(1.7rem,3vw,2.4rem);font-weight:900;color:var(--navy);margin-top:10px;">Your Cart</h1>
+  <p style="color:var(--text-light);font-size:.9rem;margin-top:6px;">Review your items · Place order · We'll call to confirm delivery</p>
+</div>
+
+<!-- Empty state -->
+<div class="empty-cart" id="cart-empty" style="display:none;">
+  <div class="empty-icon">🛒</div>
+  <h3>Your cart is empty</h3>
+  <p>Add a product below and come back to checkout.</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <a href="index.html" class="btn btn--gold">Shop Foot Massager</a>
+    <a href="body.html"  class="btn btn--outline-navy">Shop Body Massager</a>
+  </div>
+</div>
+
+<!-- Cart content -->
+<div class="cart-layout" id="cart-content" style="display:none;">
+
+  <!-- LEFT column -->
+  <div>
+    <!-- Cart items -->
+    <div id="cart-items"></div>
+
+    <!-- Order bump -->
+    <div id="cart-bump"></div>
+
+    <!-- Continue links -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+      <a href="index.html" class="btn btn--outline-navy btn--sm">← Foot Massager</a>
+      <a href="body.html"  class="btn btn--outline-navy btn--sm">Body Massager</a>
+    </div>
+
+    <!-- Trust row -->
+    <div style="margin-top:28px;background:white;border:2px solid var(--gray-200);border-radius:20px;padding:20px;">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:space-around;align-items:center;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7647.png?v=1778708180"
+               alt="M-PESA" style="height:22px;object-fit:contain">
+          <span style="font-size:.83rem;font-weight:600;color:var(--navy)">M-PESA on Delivery</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7649.jpg?v=1778708181"
+               alt="Free Delivery" style="height:34px;object-fit:contain;border-radius:50%">
+          <span style="font-size:.83rem;font-weight:600;color:var(--navy)">Free Nairobi Delivery</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7651.png?v=1778708181"
+               alt="Warranty" style="height:34px;object-fit:contain">
+          <span style="font-size:.83rem;font-weight:600;color:var(--navy)">1 Year Warranty</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7625.jpg?v=1778708181"
+               alt="Kenya Owned" style="height:34px;object-fit:contain;border-radius:50%">
+          <span style="font-size:.83rem;font-weight:600;color:var(--navy)">Kenya Owned Brand</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT column — summary + checkout -->
+  <div class="cart-summary">
+    <h3>Order Summary</h3>
+
+    <div id="cart-summary-lines"></div>
+
+    <!-- COD notice -->
+    <div class="cod-box">
+      <span style="font-size:1.2rem">📦</span>
+      <div>
+        <strong>Cash on Delivery</strong>
+        <p>Pay only when you receive and inspect your order. M-PESA, cash, or card accepted at the door.</p>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="checkout-form">
+      <h4 style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:18px;">Delivery Details</h4>
+
+      <label class="form-label" for="f-name">Full Name</label>
+      <input class="form-input" id="f-name" type="text"
+             placeholder="e.g. Grace Wanjiku" autocomplete="name">
+
+      <label class="form-label" for="f-phone">Kenyan Phone Number</label>
+      <input class="form-input" id="f-phone" type="tel"
+             placeholder="07XXXXXXXX" maxlength="10" autocomplete="tel">
+
+      <label class="form-label" for="f-town">Town / Area <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--gray-400)">(optional)</span></label>
+      <input class="form-input" id="f-town" type="text"
+             placeholder="e.g. Westlands, Nairobi">
+
+      <button class="btn btn--gold btn--full btn--lg" style="margin-top:4px"
+              onclick="handleCheckout()">
+        ✅&nbsp; Place Order — Pay on Delivery
+      </button>
+
+      <p style="text-align:center;font-size:.72rem;color:var(--text-light);margin-top:12px;line-height:1.6">
+        🔒 Our team will call within 2 hours to confirm. No payment until delivery.
+      </p>
+    </div>
+
+    <!-- Payment logos -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-200);flex-wrap:wrap;">
+      <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7647.png?v=1778708180"
+           alt="M-PESA" style="height:18px;object-fit:contain">
+      <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7648.png?v=1778708181"
+           alt="Visa Mastercard" style="height:18px;object-fit:contain">
+      <span style="font-size:.7rem;color:var(--text-light)">Secure &amp; Trusted</span>
+    </div>
+  </div>
+
+</div><!-- /cart-content -->
+```
+
+  </div>
+</main>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░░░░
+     CROSS-SELL
+░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+
+<section class="section" style="background:white">
+  <div class="container">
+    <div class="section-head section-head--center" style="margin-bottom:36px">
+      <div class="section-eyebrow">Complete Your Bundle</div>
+      <h2 class="section-title" style="font-size:1.9rem">You Might Also Like</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:720px;margin:0 auto;">
+
+```
+  <!-- Foot massager card -->
+  <div style="background:var(--off-white);border:2px solid var(--gray-200);border-radius:22px;overflow:hidden;transition:all .25s ease"
+       onmouseover="this.style.borderColor='var(--teal)';this.style.transform='translateY(-4px)'"
+       onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='translateY(0)'">
+    <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7617.jpg?v=1778708181"
+         alt="ReviveMate Foot Massager"
+         style="width:100%;height:180px;object-fit:cover">
+    <div style="padding:16px">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:6px">EMS Foot Therapy</div>
+      <h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:8px">ReviveMate Foot Massager</h3>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <span style="font-size:1.1rem;font-weight:900;color:var(--navy)">KES 3,499</span>
+        <span style="font-size:.8rem;color:var(--text-light);text-decoration:line-through">KES 4,999</span>
+      </div>
+      <button class="btn btn--gold btn--full btn--sm"
+              onclick="addToCart('foot'); showToast('✓ ReviveMate added!'); renderCart()">
+        + Add to Cart
+      </button>
+    </div>
+  </div>
+
+  <!-- Body massager card -->
+  <div style="background:var(--off-white);border:2px solid var(--gray-200);border-radius:22px;overflow:hidden;transition:all .25s ease"
+       onmouseover="this.style.borderColor='var(--teal)';this.style.transform='translateY(-4px)'"
+       onmouseout="this.style.borderColor='var(--gray-200)';this.style.transform='translateY(0)'">
+    <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7611.jpg?v=1778708181"
+         alt="ReliefKit Body Massager"
+         style="width:100%;height:180px;object-fit:cover">
+    <div style="padding:16px">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:6px">5-in-1 Body EMS</div>
+      <h3 style="font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:8px">ReliefKit Body Massager</h3>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <span style="font-size:1.1rem;font-weight:900;color:var(--navy)">KES 2,999</span>
+        <span style="font-size:.8rem;color:var(--text-light);text-decoration:line-through">KES 3,999</span>
+      </div>
+      <button class="btn btn--gold btn--full btn--sm"
+              onclick="addToCart('body'); showToast('✓ ReliefKit added!'); renderCart()">
+        + Add to Cart
+      </button>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ░░ FOOTER ░░ -->
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7600.png?v=1778708181"
+               alt="Relivastep" onerror="this.style.display='none'">
+          <span class="footer-logo-text">reliva<span>step</span></span>
+        </a>
+        <p>Kenya's #1 EMS massager brand. Wellness · Balance · Vitality.</p>
+        <div class="footer-payments">
+          <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7647.png?v=1778708180"
+               alt="M-PESA" class="mpesa-logo">
+          <img src="https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7648.png?v=1778708181"
+               alt="Visa Mastercard">
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="index.html">ReviveMate Foot Massager</a></li>
+          <li><a href="body.html">ReliefKit Body Massager</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Track My Order</a></li>
+          <li><a href="#">Returns Policy</a></li>
+          <li><a href="#">Warranty Claims</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/254700000000">WhatsApp Us</a></li>
+          <li><a href="mailto:hello@relivastep.com">hello@relivastep.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Relivastep Ltd. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ░░ WHATSAPP FLOAT ░░ -->
+
+<a href="https://wa.me/254700000000?text=Hi!%20I%20need%20help%20with%20my%20order"
+class="wa-btn" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="script.js"></script>
+
+</body>
+</html>
