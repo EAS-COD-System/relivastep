@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart & Checkout – relivastep Kenya</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header><div class="container header-flex"><img src="images/logo.svg" class="logo"><a href="cart.html" class="cart-icon">🛒 <span id="cartCount">0</span></a></div></header>
+    <main class="container">
+        <h1>Shopping Cart</h1>
+        <div id="cartItemsList"></div>
+        <div id="cartTotalPrice" class="cart-total"></div>
+        
+        <!-- Order bump inside cart if missing product -->
+        <div id="cartOrderBump" style="display:none;" class="order-bump">
+            <h3>💡 You're missing the perfect pair</h3>
+            <p>Add <strong id="missingProductName"></strong> for only <strong>KES 3,500</strong> (save KES 1,500)</p>
+            <button id="addMissingProduct" class="btn-secondary">Add now</button>
+        </div>
+
+        <div class="checkout-section">
+            <h2>M-PESA Checkout</h2>
+            <p>Phone number (e.g., 0712345678)</p>
+            <input type="tel" id="mpesaPhone" placeholder="0712345678">
+            <button id="checkoutBtn" class="btn-primary">Complete Purchase</button>
+            <p class="mpesa-note">You'll receive an STK push to your phone. Pay via M-PESA, then we'll confirm delivery.</p>
+        </div>
+    </main>
+    <footer><div class="container"><p>© 2025 relivastep – M-PESA Till: 123456</p></div></footer>
+    <script src="script.js"></script>
+    <script>
+        const footProduct = { id: 'foot', name: 'ReviveMate Foot Massager', price: 4999 };
+        const bodyProduct = { id: 'body', name: 'ReliefKit Body Massager', price: 4999 };
+        
+        function renderCart() {
+            const cart = getCart();
+            const container = document.getElementById('cartItemsList');
+            if (!cart.length) { container.innerHTML = '<p>Your cart is empty. <a href="index.html">Shop now</a></p>'; return; }
+            let html = '<table class="cart-table"><tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr>';
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                html += `<tr><td>${item.name}</td><td>KES ${item.price}</td><td><button onclick="updateQuantity('${item.id}', -1)">-</button> ${item.quantity} <button onclick="updateQuantity('${item.id}', 1)">+</button></td><td>KES ${itemTotal}</td><td><button onclick="removeFromCart('${item.id}')">Remove</button></td></tr>`;
+            });
+            html += `</table><div class="cart-total">Total: KES ${total}</div>`;
+            container.innerHTML = html;
+            document.getElementById('cartTotalPrice').innerHTML = `<h3>Total: KES ${total}</h3>`;
+
+            // Order bump: if only foot massager, offer body; if only body, offer foot
+            const hasFoot = cart.some(i => i.id === 'foot');
+            const hasBody = cart.some(i => i.id === 'body');
+            const bumpDiv = document.getElementById('cartOrderBump');
+            if ((hasFoot && !hasBody) || (!hasFoot && hasBody)) {
+                bumpDiv.style.display = 'block';
+                const missing = !hasBody ? bodyProduct : footProduct;
+                document.getElementById('missingProductName').innerText = missing.name;
+                document.getElementById('addMissingProduct').onclick = () => {
+                    addToCart(missing, 3500);
+                    alert(`${missing.name} added at KES 3,500!`);
+                    renderCart();
+                    bumpDiv.style.display = 'none';
+                };
+            } else {
+                bumpDiv.style.display = 'none';
+            }
+        }
+
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            const phone = document.getElementById('mpesaPhone').value;
+            if (!phone.match(/^07\d{8}$/)) { alert('Enter a valid Kenyan phone number (07XXXXXXXX)'); return; }
+            alert(`M-PESA STK push sent to ${phone}. Complete payment to finalize order. (Demo – in production integrate with Daraja API)`);
+            // Here you would call your backend to initiate STK push
+        });
+        renderCart();
+        updateCartCount();
+    </script>
+</body>
+</html>
