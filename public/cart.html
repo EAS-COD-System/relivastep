@@ -3,53 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart & Checkout – relivastep Kenya</title>
+    <title>Your Cart | relivastep Kenya</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header><div class="container header-flex"><img src="images/logo.svg" class="logo"><a href="cart.html" class="cart-icon">🛒 <span id="cartCount">0</span></a></div></header>
-    <main class="container">
-        <h1>Shopping Cart</h1>
+    <header>
+        <div class="container header-flex">
+            <img src="images/logo.svg" alt="relivastep" class="logo">
+            <a href="cart.html" class="cart-icon">🛒 <span id="cartCount">0</span></a>
+        </div>
+    </header>
+
+    <main class="container cart-page">
+        <h1>Your Cart</h1>
         <div id="cartItemsList"></div>
         <div id="cartTotalPrice" class="cart-total"></div>
-        
-        <!-- Order bump inside cart if missing product -->
+
+        <!-- Order bump inside cart if missing the other product -->
         <div id="cartOrderBump" style="display:none;" class="order-bump">
-            <h3>💡 You're missing the perfect pair</h3>
+            <h3>💡 Complete your recovery kit</h3>
             <p>Add <strong id="missingProductName"></strong> for only <strong>KES 3,500</strong> (save KES 1,500)</p>
             <button id="addMissingProduct" class="btn-secondary">Add now</button>
         </div>
 
+        <!-- Demo checkout (no backend) -->
         <div class="checkout-section">
-            <h2>M-PESA Checkout</h2>
+            <h2>Checkout (Demo Mode)</h2>
+            <p>This is a static demo. In production, M-PESA payment would be processed here.</p>
             <p>Phone number (e.g., 0712345678)</p>
             <input type="tel" id="mpesaPhone" placeholder="0712345678">
-            <button id="checkoutBtn" class="btn-primary">Complete Purchase</button>
-            <p class="mpesa-note">You'll receive an STK push to your phone. Pay via M-PESA, then we'll confirm delivery.</p>
+            <button id="checkoutBtn" class="btn-primary">Place Order (Demo)</button>
+            <div id="paymentStatus"></div>
+            <p class="mpesa-note">Your order will be saved and we'll contact you for payment via M-PESA.</p>
         </div>
     </main>
-    <footer><div class="container"><p>© 2025 relivastep – M-PESA Till: 123456</p></div></footer>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 relivastep – Your step to relief</p>
+            <p>M-PESA Till: 123456 | Free delivery over KES 5,000</p>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
     <script>
         const footProduct = { id: 'foot', name: 'ReviveMate Foot Massager', price: 4999 };
         const bodyProduct = { id: 'body', name: 'ReliefKit Body Massager', price: 4999 };
-        
+
         function renderCart() {
             const cart = getCart();
             const container = document.getElementById('cartItemsList');
-            if (!cart.length) { container.innerHTML = '<p>Your cart is empty. <a href="index.html">Shop now</a></p>'; return; }
+            if (!cart.length) {
+                container.innerHTML = '<p>Your cart is empty. <a href="index.html">Shop now</a></p>';
+                document.getElementById('cartTotalPrice').innerHTML = '';
+                document.getElementById('cartOrderBump').style.display = 'none';
+                return;
+            }
             let html = '<table class="cart-table"><tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr>';
             let total = 0;
             cart.forEach(item => {
                 const itemTotal = item.price * item.quantity;
                 total += itemTotal;
-                html += `<tr><td>${item.name}</td><td>KES ${item.price}</td><td><button onclick="updateQuantity('${item.id}', -1)">-</button> ${item.quantity} <button onclick="updateQuantity('${item.id}', 1)">+</button></td><td>KES ${itemTotal}</td><td><button onclick="removeFromCart('${item.id}')">Remove</button></td></tr>`;
+                html += `<tr>
+                            <td>${item.name}</td>
+                            <td>KES ${item.price}</td>
+                            <td>
+                                <button onclick="updateQuantity('${item.id}', -1)">-</button>
+                                ${item.quantity}
+                                <button onclick="updateQuantity('${item.id}', 1)">+</button>
+                            </td>
+                            <td>KES ${itemTotal}</td>
+                            <td><button onclick="removeFromCart('${item.id}')">Remove</button></td>
+                         </tr>`;
             });
-            html += `</table><div class="cart-total">Total: KES ${total}</div>`;
+            html += '</table>';
             container.innerHTML = html;
             document.getElementById('cartTotalPrice').innerHTML = `<h3>Total: KES ${total}</h3>`;
 
-            // Order bump: if only foot massager, offer body; if only body, offer foot
+            // Order bump logic: if only one product, offer the other at discount
             const hasFoot = cart.some(i => i.id === 'foot');
             const hasBody = cart.some(i => i.id === 'body');
             const bumpDiv = document.getElementById('cartOrderBump');
@@ -66,14 +98,35 @@
             } else {
                 bumpDiv.style.display = 'none';
             }
+            return total;
         }
 
+        // Demo checkout - no backend, just an alert
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             const phone = document.getElementById('mpesaPhone').value;
-            if (!phone.match(/^07\d{8}$/)) { alert('Enter a valid Kenyan phone number (07XXXXXXXX)'); return; }
-            alert(`M-PESA STK push sent to ${phone}. Complete payment to finalize order. (Demo – in production integrate with Daraja API)`);
-            // Here you would call your backend to initiate STK push
+            if (!phone.match(/^07\d{8}$/)) {
+                alert('Enter a valid Kenyan phone number (07XXXXXXXX)');
+                return;
+            }
+            const cart = getCart();
+            if (cart.length === 0) {
+                alert('Cart is empty');
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const orderSummary = cart.map(item => `${item.name} x ${item.quantity} = KES ${item.price * item.quantity}`).join('\n');
+
+            // Demo alert – in production, this would call M-PESA API
+            alert(`📦 DEMO ORDER PLACED!\n\nPhone: ${phone}\nTotal: KES ${total}\n\nItems:\n${orderSummary}\n\nIn production, you would receive an M-PESA STK push.`);
+
+            // Optional: clear cart after demo order (uncomment if desired)
+            // localStorage.removeItem('relivastep_cart');
+            // updateCartCount();
+            // renderCart();
+
+            document.getElementById('paymentStatus').innerHTML = '<p style="color:green;">Demo order submitted! We will contact you for payment.</p>';
         });
+
         renderCart();
         updateCartCount();
     </script>
