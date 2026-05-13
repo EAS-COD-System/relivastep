@@ -1,295 +1,147 @@
-/* ============================================================
-RELIVASTEP — script.js
-Cart, upsell modal, FAQ, scroll animations, toast
-============================================================ */
-
-‘use strict’;
-
-/* ── Products catalogue ─────────────────── */
+// PRODUCTS
 const PRODUCTS = {
-foot: {
-id: ‘foot’,
-name: ‘ReviveMate Foot Massager’,
-desc: ‘EMS foot therapy • 6 modes’,
-price: 3499,
-img: ‘https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7617.jpg?v=1778708181’,
-},
-body: {
-id: ‘body’,
-name: ‘ReliefKit Body Massager’,
-desc: ‘5-in-1 full body EMS’,
-price: 2999,
-img: ‘https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7611.jpg?v=1778708181’,
-}
+  foot: { id: 'foot', name: 'ReviveMate Foot Massager', price: 3499, img: 'https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7617.jpg?v=1778708181' },
+  body: { id: 'body', name: 'ReliefKit Body Massager', price: 2999, img: 'https://cdn.shopify.com/s/files/1/0825/6864/2859/files/IMG_7611.jpg?v=1778708181' }
 };
 
-/* Upsell offers when product X is in cart */
-const UPSELL = {
-foot: { id: ‘body’, price: 1999, saving: 1000 },
-body: { id: ‘foot’, price: 2499, saving: 1000 },
-};
+// Cart functions
+function getCart() { return JSON.parse(localStorage.getItem('relivastep_cart') || '[]'); }
+function saveCart(cart) { localStorage.setItem('relivastep_cart', JSON.stringify(cart)); refreshCartBadge(); }
 
-/* ── Cart helpers ───────────────────────── */
-function getCart() {
-try { return JSON.parse(localStorage.getItem(‘rs_cart’) || ‘[]’); }
-catch { return []; }
-}
-
-function saveCart(cart) {
-localStorage.setItem(‘rs_cart’, JSON.stringify(cart));
-refreshBadge();
-}
-
-function addToCart(productId, customPrice) {
-const cart = getCart();
-const p = PRODUCTS[productId];
-if (!p) return;
-const existing = cart.find(i => i.id === productId);
-if (existing) {
-existing.qty += 1;
-} else {
-cart.push({
-id: productId,
-name: p.name,
-desc: p.desc,
-price: customPrice != null ? customPrice : p.price,
-originalPrice: p.price,
-img: p.img,
-qty: 1,
-});
-}
-saveCart(cart);
-refreshBadge();
+function addToCart(id, customPrice) {
+  const cart = getCart();
+  const product = PRODUCTS[id];
+  if (!product) return;
+  const price = customPrice !== undefined ? customPrice : product.price;
+  const existing = cart.find(i => i.id === id);
+  if (existing) existing.qty += 1;
+  else cart.push({ id, name: product.name, price, qty: 1, img: product.img });
+  saveCart(cart);
+  showToast(`${product.name} added to cart!`);
 }
 
-function removeFromCart(productId) {
-saveCart(getCart().filter(i => i.id !== productId));
-if (typeof renderCart === ‘function’) renderCart();
+function removeFromCart(id) {
+  let cart = getCart();
+  cart = cart.filter(i => i.id !== id);
+  saveCart(cart);
+  if (typeof renderCartPage === 'function') renderCartPage();
 }
 
-function updateQty(productId, delta) {
-const cart = getCart();
-const item = cart.find(i => i.id === productId);
-if (!item) return;
-item.qty = Math.max(1, item.qty + delta);
-saveCart(cart);
-if (typeof renderCart === ‘function’) renderCart();
+function updateQty(id, delta) {
+  const cart = getCart();
+  const item = cart.find(i => i.id === id);
+  if (item) {
+    item.qty += delta;
+    if (item.qty <= 0) removeFromCart(id);
+    else saveCart(cart);
+    if (typeof renderCartPage === 'function') renderCartPage();
+  }
 }
 
-function refreshBadge() {
-const total = getCart().reduce((s, i) => s + i.qty, 0);
-document.querySelectorAll(’.cart-badge’).forEach(el => {
-el.textContent = total;
-el.style.display = total > 0 ? ‘flex’ : ‘none’;
-});
+function refreshCartBadge() {
+  const total = getCart().reduce((s,i) => s + i.qty, 0);
+  document.querySelectorAll('.cart-badge').forEach(el => el.textContent = total);
 }
 
-function cartSubtotal() {
-return getCart().reduce((s, i) => s + i.price * i.qty, 0);
-}
-function cartOrigTotal() {
-return getCart().reduce((s, i) => s + i.originalPrice * i.qty, 0);
-}
-
-/* ── Toast ──────────────────────────────── */
-let toastTimer;
 function showToast(msg) {
-let el = document.getElementById(‘rs-toast’);
-if (!el) {
-el = document.createElement(‘div’);
-el.id = ‘rs-toast’;
-el.className = ‘toast’;
-document.body.appendChild(el);
-}
-el.textContent = msg;
-el.classList.add(‘show’);
-clearTimeout(toastTimer);
-toastTimer = setTimeout(() => el.classList.remove(‘show’), 3200);
-}
-
-/* ── Upsell modal ───────────────────────── */
-let modalDismissed = false;
-
-function openModal(triggerProductId) {
-if (modalDismissed) return;
-const offer = UPSELL[triggerProductId];
-if (!offer) return;
-const modal = document.getElementById(‘upsell-modal’);
-if (!modal) return;
-const p = PRODUCTS[offer.id];
-
-document.getElementById(‘modal-img’).src           = p.img;
-document.getElementById(‘modal-name’).textContent  = p.name;
-document.getElementById(‘modal-sale’).textContent  = ’KES ’ + offer.price.toLocaleString();
-document.getElementById(‘modal-orig’).textContent  = ’KES ’ + p.price.toLocaleString();
-document.getElementById(‘modal-save’).textContent  = ’Save KES ’ + offer.saving.toLocaleString();
-
-document.getElementById(‘modal-accept’).onclick = () => {
-addToCart(offer.id, offer.price);
-closeModal();
-showToast(’🎉 ’ + p.name + ’ added at KES ’ + offer.price.toLocaleString() + ‘!’);
-};
-
-modal.classList.add(‘active’);
+  let toast = document.getElementById('toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.style.cssText = 'position:fixed; bottom:20px; right:20px; background:#0B1A3A; color:white; padding:12px 20px; border-radius:30px; z-index:9999; transition:0.3s; opacity:0;';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  setTimeout(() => toast.style.opacity = '0', 2500);
 }
 
-function closeModal() {
-const modal = document.getElementById(‘upsell-modal’);
-if (modal) modal.classList.remove(‘active’);
-modalDismissed = true;
+function handleAdd(id) {
+  addToCart(id);
+  setTimeout(() => {
+    const cart = getCart();
+    const other = id === 'foot' ? 'body' : 'foot';
+    const alreadyHasOther = cart.some(i => i.id === other);
+    if (!alreadyHasOther) {
+      const discountPrice = other === 'body' ? 1999 : 2499;
+      if (confirm(`Add ${PRODUCTS[other].name} for only KES ${discountPrice} (save KES 1000)?`)) {
+        addToCart(other, discountPrice);
+      }
+    }
+  }, 500);
 }
 
-/* ── Main add-to-cart handler ───────────── */
-function handleAdd(productId) {
-addToCart(productId);
-showToast(‘✓ Added to cart!’);
-setTimeout(() => openModal(productId), 700);
+function renderCartPage() {
+  const cart = getCart();
+  const emptyDiv = document.getElementById('cart-empty');
+  const contentDiv = document.getElementById('cart-content');
+  if (!cart.length) {
+    if (emptyDiv) emptyDiv.style.display = 'block';
+    if (contentDiv) contentDiv.style.display = 'none';
+    return;
+  }
+  if (emptyDiv) emptyDiv.style.display = 'none';
+  if (contentDiv) contentDiv.style.display = 'block';
+
+  const container = document.getElementById('cart-items');
+  if (!container) return;
+  let html = '';
+  cart.forEach(item => {
+    html += `<div class="cart-item">
+      <img src="${item.img}" alt="${item.name}">
+      <div style="flex:1">
+        <strong>${item.name}</strong><br>
+        <span>KES ${item.price}</span>
+        <div style="margin-top:8px;">
+          <button onclick="updateQty('${item.id}', -1)">-</button>
+          <span style="margin:0 12px;">${item.qty}</span>
+          <button onclick="updateQty('${item.id}', 1)">+</button>
+          <button style="margin-left:12px;" onclick="removeFromCart('${item.id}')">Remove</button>
+        </div>
+      </div>
+      <div><strong>KES ${item.price * item.qty}</strong></div>
+    </div>`;
+  });
+  container.innerHTML = html;
+
+  const subtotal = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const shipping = subtotal >= 2000 ? 0 : 200;
+  const total = subtotal + shipping;
+  document.getElementById('cart-summary').innerHTML = `
+    <div>Subtotal: KES ${subtotal}</div>
+    <div>Delivery: ${shipping === 0 ? 'FREE' : 'KES '+shipping}</div>
+    <div style="font-weight:800; margin-top:12px;">Total: KES ${total}</div>
+  `;
 }
 
-/* ── Cart page renderer ─────────────────── */
-function renderCart() {
-const cart = getCart();
-const wrap = document.getElementById(‘cart-items’);
-const emptyEl = document.getElementById(‘cart-empty’);
-const contentEl = document.getElementById(‘cart-content’);
-if (!wrap) return;
+function checkout() {
+  const cart = getCart();
+  if (!cart.length) return alert('Cart empty');
+  const name = document.getElementById('fullname')?.value.trim();
+  const phone = document.getElementById('phone')?.value.trim();
+  const town = document.getElementById('town')?.value.trim();
+  if (!name || !phone) return alert('Please enter your name and phone number');
+  if (!/^(07|01)\d{8}$/.test(phone)) return alert('Enter a valid Kenyan phone number (07XXXXXXXX)');
 
-if (cart.length === 0) {
-if (emptyEl)   emptyEl.style.display = ‘block’;
-if (contentEl) contentEl.style.display = ‘none’;
-return;
-}
-if (emptyEl)   emptyEl.style.display = ‘none’;
-if (contentEl) contentEl.style.display = ‘grid’;
-
-/* Items */
-wrap.innerHTML = ‘’;
-cart.forEach(item => {
-const saved = (item.originalPrice - item.price) * item.qty;
-const div = document.createElement(‘div’);
-div.className = ‘cart-item’;
-div.innerHTML = `<img src="${item.img}" alt="${item.name}" class="cart-item-img" onerror="this.style.background='var(--teal-pale)'"> <div class="cart-item-details"> <div class="cart-item-name">${item.name}</div> <div class="cart-item-desc">${item.desc}</div> <div class="qty-row"> <div class="qty-ctrl"> <button class="qty-btn" onclick="updateQty('${item.id}',-1)">−</button> <span class="qty-num">${item.qty}</span> <button class="qty-btn" onclick="updateQty('${item.id}',1)">+</button> </div> <button class="remove-btn" onclick="removeFromCart('${item.id}')">🗑 Remove</button> </div> </div> <div class="cart-item-price"> <div class="item-price">KES ${(item.price * item.qty).toLocaleString()}</div> ${saved > 0 ?`<div class="item-was">KES ${(item.originalPrice * item.qty).toLocaleString()}</div>
-<div class="item-saved">−KES ${saved.toLocaleString()}</div>`: ''} </div>`;
-wrap.appendChild(div);
-});
-
-renderBump(cart);
-renderSummary(cart);
+  const subtotal = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const shipping = subtotal >= 2000 ? 0 : 200;
+  const total = subtotal + shipping;
+  const items = cart.map(i => `${i.name} x${i.qty}`).join(', ');
+  alert(`✅ Order received!\n\nCustomer: ${name}\nPhone: ${phone}\nArea: ${town||'Nairobi'}\nItems: ${items}\nTotal: KES ${total}\n\nYou will pay on delivery. Our team will call you within 2 hours to confirm.\n\nAsante sana! 🇰🇪`);
+  localStorage.removeItem('relivastep_cart');
+  renderCartPage();
+  refreshCartBadge();
+  window.location.href = '/';
 }
 
-function renderBump(cart) {
-const el = document.getElementById(‘cart-bump’);
-if (!el) return;
-const ids = cart.map(i => i.id);
-const hasFoot = ids.includes(‘foot’);
-const hasBody = ids.includes(‘body’);
-
-if (hasFoot && hasBody) { el.innerHTML = ‘’; return; }
-
-let offerId, offerPrice, saving;
-if (hasFoot && !hasBody) { offerId = ‘body’; offerPrice = 1999; saving = 1000; }
-else if (hasBody && !hasFoot) { offerId = ‘foot’; offerPrice = 2499; saving = 1000; }
-else { el.innerHTML = ‘’; return; }
-
-const p = PRODUCTS[offerId];
-el.innerHTML = `<div class="cart-bump"> <div class="cart-bump-tag">🔥 One-Time Bundle Upgrade</div> <div class="cart-bump-row"> <img src="${p.img}" alt="${p.name}" class="cart-bump-img" onerror="this.style.background='var(--teal-pale)'"> <div class="cart-bump-details"> <div class="cart-bump-name">${p.name}</div> <div class="cart-bump-desc">${p.desc}</div> <div class="cart-bump-pr"> <span class="bump-price">KES ${offerPrice.toLocaleString()}</span> <span class="bump-orig">KES ${p.price.toLocaleString()}</span> <span class="bump-save">Save KES ${saving.toLocaleString()}</span> </div> <button class="btn btn--gold btn--sm" onclick="addBump('${offerId}',${offerPrice})"> + Add to Order </button> </div> </div> </div>`;
-}
-
-function addBump(productId, price) {
-addToCart(productId, price);
-renderCart();
-showToast(‘🎉 Added to your order!’);
-}
-
-function renderSummary(cart) {
-const el = document.getElementById(‘cart-summary-lines’);
-if (!el) return;
-const sub = cartSubtotal();
-const orig = cartOrigTotal();
-const savings = orig - sub;
-const ship = sub >= 2000 ? 0 : 200;
-el.innerHTML = `<div class="summary-row"><span>Subtotal</span><span>KES ${sub.toLocaleString()}</span></div> ${savings > 0 ?`<div class="summary-row"><span>Savings</span><span class="saved">−KES ${savings.toLocaleString()}</span></div>`: ''} <div class="summary-row"><span>Delivery</span><span>${ship === 0 ? '<span style="color:var(--green);font-weight:700">FREE</span>' : 'KES ' + ship}</span></div> <div class="summary-row total"><span>Total</span><span>KES ${(sub + ship).toLocaleString()}</span></div>`;
-}
-
-/* ── Demo checkout ──────────────────────── */
-function handleCheckout() {
-const nameEl  = document.getElementById(‘f-name’);
-const phoneEl = document.getElementById(‘f-phone’);
-const townEl  = document.getElementById(‘f-town’);
-const name  = nameEl  ? nameEl.value.trim()  : ‘’;
-const phone = phoneEl ? phoneEl.value.trim() : ‘’;
-const town  = townEl  ? townEl.value.trim()  : ‘Nairobi’;
-const cart  = getCart();
-
-if (!name)  { showToast(‘⚠️ Please enter your full name’); nameEl && nameEl.focus(); return; }
-if (!/^(07|01)\d{8}$/.test(phone)) {
-showToast(‘⚠️ Enter a valid number (07XXXXXXXX)’);
-phoneEl && phoneEl.focus(); return;
-}
-if (cart.length === 0) { showToast(‘Your cart is empty!’); return; }
-
-const sub  = cartSubtotal();
-const ship = sub >= 2000 ? 0 : 200;
-const lines = cart.map(i =>
-`• ${i.name} × ${i.qty}  →  KES ${(i.price*i.qty).toLocaleString()}`
-).join(’\n’);
-
-alert(`✅ ORDER CONFIRMED!
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-👤 ${name}
-📱 ${phone}
-📍 ${town || ‘Nairobi’}
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-${lines}
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚚 Delivery: ${ship === 0 ? ‘FREE’ : ’KES ’ + ship}
-💰 TOTAL: KES ${(sub + ship).toLocaleString()}
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-📦 Delivery: 1–3 business days
-💚 Pay via M-PESA on delivery
-
-Our team will call you within
-2 hours to confirm. Asante! 🇰🇪`);
-
-localStorage.removeItem(‘rs_cart’);
-refreshBadge();
-window.location.href = ‘index.html’;
-}
-
-/* ── FAQ accordion ──────────────────────── */
-function initFAQ() {
-document.querySelectorAll(’.faq-q’).forEach(btn => {
-btn.addEventListener(‘click’, () => {
-const item = btn.closest(’.faq-item’);
-const isOpen = item.classList.contains(‘open’);
-document.querySelectorAll(’.faq-item.open’).forEach(el => el.classList.remove(‘open’));
-if (!isOpen) item.classList.add(‘open’);
-});
-});
-}
-
-/* ── Scroll reveal ──────────────────────── */
-function initReveal() {
-if (!(‘IntersectionObserver’ in window)) {
-document.querySelectorAll(’.reveal’).forEach(el => el.classList.add(‘visible’));
-return;
-}
-const obs = new IntersectionObserver(entries => {
-entries.forEach(e => { if (e.isIntersecting) e.target.classList.add(‘visible’); });
-}, { threshold: 0.1, rootMargin: ‘0px 0px -40px 0px’ });
-document.querySelectorAll(’.reveal’).forEach(el => obs.observe(el));
-}
-
-/* ── Init ────────────────────────────────── */
-document.addEventListener(‘DOMContentLoaded’, () => {
-refreshBadge();
-initFAQ();
-initReveal();
-
-/* Modal backdrop close */
-const modal = document.getElementById(‘upsell-modal’);
-if (modal) modal.addEventListener(‘click’, e => { if (e.target === modal) closeModal(); });
-
-/* Cart page */
-if (document.getElementById(‘cart-items’)) renderCart();
+// FAQ accordion (simple)
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      item.classList.toggle('active');
+      const sign = q.querySelector('span');
+      if (sign) sign.textContent = item.classList.contains('active') ? '−' : '+';
+    });
+  });
 });
